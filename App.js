@@ -1,10 +1,28 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image, Button } from "react-native";
+import { ImagePicker } from "expo";
 
 export default function App() {
+  const [photo, setPhoto] = useState();
+
+  const _uploadPhoto = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync();
+
+    if (result.uri) {
+      setPhoto(result);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      {photo && (
+        <Image
+          source={{ uri: photo.uri }}
+          style={{ width: 300, height: 300 }}
+        />
+      )}
+      <Text>This is super simple photo album example!</Text>
+      <Button onPress={_uploadPhoto} title="Upload" />
     </View>
   );
 }
@@ -12,8 +30,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });
