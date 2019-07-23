@@ -19,20 +19,29 @@ const Card = styled.View`
   border-radius: 4px;
   padding: 16px;
   background: white;
+  flex: 1;
+  min-width: 100px;
+`;
+
+const CardContainer = styled.View`
+  flex-flow: row wrap;
+  /* background: papayawhip; */
 `;
 
 const CardLayout = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        {array.map((value, index) => (
-          <Card key={index}>
-            <Text>{value}</Text>
-          </Card>
-          // <View key={index} style={styles.card}>
-          //   <Text>{value}</Text>
-          // </View>
-        ))}
+        <CardContainer>
+          {array.map((value, index) => (
+            <Card key={index}>
+              <Text>{value}</Text>
+            </Card>
+            // <View key={index} style={styles.card}>
+            //   <Text>{value}</Text>
+            // </View>
+          ))}
+        </CardContainer>
       </ScrollView>
     </View>
   );
@@ -40,13 +49,14 @@ const CardLayout = () => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 20,
     flex: 1,
     backgroundColor: "pink",
     justifyContent: "center",
     alignItems: "center"
   },
   scrollView: {
-    padding: 16,
+    padding: 8,
     backgroundColor: "skyblue",
     alignSelf: "stretch"
   },
