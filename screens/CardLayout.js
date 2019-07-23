@@ -9,17 +9,18 @@ const Card = styled.View`
   border-radius: 2;
   border-color: #ddd;
   border-bottom-width: 0;
-  shadow-color: #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* shadow-color: #000;
   shadow-offset: {width: 0, height: 2};
   shadow-opacity: 0.8;
-  shadow-radius: 2;
-  elevation: 1;
+  shadow-radius: 2; */
+  /* elevation: 1; // Android Only? */
   margin: 8px;
   background-color: white;
   border-radius: 4px;
   padding: 16px;
   background: white;
-  flex: 1;
+  flex: ${({ big }) => (big ? 9 : 1)};
   min-width: 100px;
 `;
 
@@ -34,7 +35,7 @@ const CardLayout = () => {
       <ScrollView style={styles.scrollView}>
         <CardContainer>
           {array.map((value, index) => (
-            <Card key={index}>
+            <Card key={index} big={index % 4 === 0}>
               <Text>{value}</Text>
             </Card>
             // <View key={index} style={styles.card}>
