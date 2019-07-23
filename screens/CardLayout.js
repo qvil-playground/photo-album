@@ -1,35 +1,42 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
+import styled from "styled-components/native";
 
 const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+const Card = styled.View`
+  border-width: 1;
+  border-radius: 2;
+  border-color: #ddd;
+  border-bottom-width: 0;
+  shadow-color: #000;
+  shadow-offset: {width: 0, height: 2};
+  shadow-opacity: 0.8;
+  shadow-radius: 2;
+  elevation: 1;
+  margin: 8px;
+  background-color: white;
+  border-radius: 4px;
+  padding: 16px;
+  background: white;
+`;
+
 const CardLayout = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
         {array.map((value, index) => (
-          <View key={index} style={styles.card}>
+          <Card key={index}>
             <Text>{value}</Text>
-          </View>
+          </Card>
+          // <View key={index} style={styles.card}>
+          //   <Text>{value}</Text>
+          // </View>
         ))}
       </ScrollView>
     </View>
   );
 };
-
-// const StyledView = styled.View`
-//   border-width: 1;
-//   border-radius: 2;
-//   border-color: #ddd;
-//   border-bottom-width: 0;
-//   shadow-color: #000;
-//   shadow-offset: {width: 0, height: 2};
-//   shadow-opacity: 0.8;
-//   shadow-radius: 2;
-//   elevation: 1;
-//   margin-left: 5;
-//   margin-right: 5;
-//   margin-top: 10;
-// `
 
 const styles = StyleSheet.create({
   container: {
