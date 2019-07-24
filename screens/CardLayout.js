@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import styled from "styled-components/native";
+import useDebounce from "../hooks/useDebounce";
+// import { useDebounce } from "react-use";
 
 const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -29,20 +31,47 @@ const CardContainer = styled.View`
   /* background: papayawhip; */
 `;
 
+let count = 0;
+const _debouncedHandleScroll = () => {
+  // console.log("_debouncedHandleScroll");
+  _.debounce(() => {
+    count++;
+    console.log(count);
+  }, 100);
+};
+
 const CardLayout = () => {
+  const handleScroll = e => {
+    console.log("Start");
+    // _debouncedHandleScroll();
+  };
+  useDebounce(handleScroll, 1000, []);
+
+  // const _debouncedHandleScroll = () => {
+  //   console.log("_debouncedHandleScroll");
+  //   _.debounce(() => {
+  //     count++;
+  //     console.log(count);
+  //   }, 100);
+  // };
+
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <CardContainer>
-          {array.map((value, index) => (
-            <Card key={index} big={index % 4 === 0}>
-              <Text>{value}</Text>
-            </Card>
-            // <View key={index} style={styles.card}>
-            //   <Text>{value}</Text>
-            // </View>
-          ))}
-        </CardContainer>
+      <ScrollView
+        style={styles.scrollView}
+        scrollEventThrottle={1}
+        onScroll={handleScroll}
+      >
+        {/* <CardContainer> */}
+        {array.map((value, index) => (
+          <Card key={index} big={index % 4 === 0}>
+            <Text>{value}</Text>
+          </Card>
+          // <View key={index} style={styles.card}>
+          //   <Text>{value}</Text>
+          // </View>
+        ))}
+        {/* </CardContainer> */}
       </ScrollView>
     </View>
   );
